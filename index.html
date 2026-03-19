@@ -1,239 +1,248 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checklist Geradores - USP CeTI-RP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Geradores - USP CeTI-RP</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-body { background-color: #f4f4f4; padding: 20px; font-family: 'Segoe UI', Arial, sans-serif; }
+    <style>
+        body { background-color: #f4f4f4; padding: 10px; font-family: 'Segoe UI', Arial, sans-serif; }
 
-.usp-banner {
-    background-color: #f7b22a;
-    display: flex;
-    align-items: center;
-    padding: 15px 30px;
-    border-radius: 10px 10px 0 0;
-    border-bottom: 5px solid #005596;
-}
+        /* BANNER RESPONSIVO */
+        .usp-banner {
+            background-color: #f7b22a;
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 5px solid #005596;
+        }
 
-.usp-logo-box {
-    background: white; padding: 10px; margin-right: 20px;
-    display: flex; align-items: center; justify-content: center; border-radius: 5px;
-}
+        @media (max-width: 768px) {
+            .usp-banner { flex-direction: column; text-align: center; padding: 15px; }
+            .usp-logo-box { margin-right: 0 !important; margin-bottom: 10px; }
+            body { padding: 5px; }
+            .section-box { padding: 15px !important; }
+        }
 
-.usp-logo-box img { height: 60px; }
+        .usp-logo-box {
+            background: white; padding: 10px; margin-right: 20px;
+            display: flex; align-items: center; justify-content: center; border-radius: 5px;
+        }
 
-.card { max-width: 950px; margin: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .usp-logo-box img { height: 60px; width: auto; }
 
-.section-box {
-    background: #fff; padding: 20px; border-radius: 8px;
-    margin-bottom: 20px; border-left: 5px solid #f7b22a;
-}
+        .card { max-width: 950px; margin: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: none; }
 
-.section-title {
-    font-weight: bold; color: #005596; font-size: 0.8rem;
-    margin-bottom: 15px; display: block;
-}
+        .section-box {
+            background: #fff; padding: 20px; border-radius: 8px;
+            margin-bottom: 20px; border-left: 6px solid #f7b22a;
+        }
 
-.fuel-critical { border: 2px solid #dc3545 !important; background-color: #fff8f8 !important; }
+        .section-title {
+            font-weight: bold; color: #005596; font-size: 0.85rem;
+            margin-bottom: 15px; display: block; text-transform: uppercase;
+        }
 
-#fuel-msg {
-    color: #dc3545; font-weight: bold; font-size: 0.75rem;
-    display: none; margin-top: 5px;
-}
+        label { font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; display: block; }
 
-.btn-submit {
-    background: #005596; color: white; padding: 15px;
-    font-weight: bold; border-radius: 5px; width: 100%;
-}
+        .fuel-critical { border: 2px solid #dc3545 !important; background-color: #fff8f8 !important; }
 
-#successMsg {
-    display: none;
-}
-</style>
+        #fuel-msg {
+            color: #dc3545; font-weight: bold; font-size: 0.75rem;
+            display: none; margin-top: 5px; animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .btn-submit {
+            background: #005596; color: white; padding: 15px;
+            font-weight: bold; border-radius: 5px; width: 100%; border: none;
+            font-size: 1.1rem; transition: 0.3s;
+        }
+        .btn-submit:hover { background: #003d6b; }
+        .btn-submit:disabled { background: #6c757d; }
+
+        #successMsg { display: none; font-weight: bold; text-align: center; }
+        
+        /* Ajuste de margem para os campos no mobile */
+        .row > div { margin-bottom: 15px; }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
-<div class="card">
+<div class="container-fluid">
+    <div class="card shadow">
 
-<div class="usp-banner">
-<div class="usp-logo-box">
-<img src="logo.png">
-</div>
-<div>
-<strong>Centro de Tecnologia da Informação de Ribeirão Preto</strong><br>
-<strong>Universidade de São Paulo</strong><br>
-Vistoria Preventiva de Geradores
-</div>
-</div>
+        <div class="usp-banner">
+            <div class="usp-logo-box">
+                <img src="logo.png" alt="Logo USP">
+            </div>
+            <div class="usp-header-text">
+                <strong>Centro de Tecnologia da Informação de Ribeirão Preto</strong><br>
+                <strong>Universidade de São Paulo</strong><br>
+                <span>Vistoria Preventiva de Geradores</span>
+            </div>
+        </div>
 
-<div class="card-body">
+        <div class="card-body">
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSf54rns4b7b1SZh-QkAcG-EbOTnCpAPKp67luOFgCqZLn_uqQ/formResponse"
+                  method="POST" target="hidden_iframe" onsubmit="return handleFormSubmit(this);">
 
-<form action="https://docs.google.com/forms/d/e/1FAIpQLSf54rns4b7b1SZh-QkAcG-EbOTnCpAPKp67luOFgCqZLn_uqQ/formResponse"
-method="POST" target="hidden_iframe" onsubmit="return handleFormSubmit(this);">
+                <!-- 1. IDENTIFICAÇÃO -->
+                <div class="section-box shadow-sm">
+                    <span class="section-title">1. Identificação</span>
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <label>Data</label>
+                            <input type="date" name="entry.354204257" class="form-control" required>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <label>Responsável</label>
+                            <input type="text" name="entry.56529241" class="form-control" placeholder="Nome" required>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <label>Local</label>
+                            <select name="entry.1027575289" class="form-select">
+                                <option value="CeTIRP">CeTIRP</option>
+                                <option value="Casa 23 - Telefonia">Casa 23 - Telefonia</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <label>Gerador</label>
+                            <select name="entry.590039013" class="form-select">
+                                <option value="Cummins">Cummins</option>
+                                <option value="Stemac">Stemac</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-<!-- IDENTIFICAÇÃO -->
-<div class="section-box">
-<span class="section-title">1. Identificação</span>
+                <!-- 2. FLUIDOS -->
+                <div class="section-box shadow-sm">
+                    <span class="section-title">2. Motor e Fluidos</span>
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <label>Óleo</label>
+                            <select name="entry.2084732658" class="form-select">
+                                <option value="OK">OK</option>
+                                <option value="NÃO OK">NÃO OK</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label>Arrefecimento</label>
+                            <select name="entry.277221535" class="form-select">
+                                <option value="OK">OK</option>
+                                <option value="NÃO OK">NÃO OK</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label>Vazamentos</label>
+                            <select name="entry.294271165" class="form-select">
+                                <option value="Não">Não</option>
+                                <option value="Sim">Sim</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label>Diesel (Litros)</label>
+                            <input type="number" id="fuelInput" name="entry.2116426682" class="form-control" placeholder="Lts" required>
+                            <div id="fuel-msg">⚠️ ABAIXO DE 70L</div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="row">
-<div class="col-md-3">
-<label>Data</label>
-<input type="date" name="entry.354204257" class="form-control" required>
-</div>
+                <!-- 3. ELÉTRICA -->
+                <div class="section-box shadow-sm">
+                    <span class="section-title">3. Elétrica e Funcionamento</span>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <label>Bateria (V)</label>
+                            <input type="text" name="entry.818904757" class="form-control" placeholder="Ex: 13.5V">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label>Horímetro</label>
+                            <input type="number" step="0.1" name="entry.848669693" class="form-control" placeholder="Horas" required>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label>Correias</label>
+                            <select name="entry.809569571" class="form-select">
+                                <option value="OK">OK</option>
+                                <option value="NÃO OK">NÃO OK</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-<div class="col-md-3">
-<label>Responsável</label>
-<input type="text" name="entry.56529241" class="form-control" required>
-</div>
+                <!-- 4. SEGURANÇA -->
+                <div class="section-box shadow-sm">
+                    <span class="section-title">4. Segurança e Infra</span>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <label>Extintor</label>
+                            <select name="entry.2132958707" class="form-select">
+                                <option value="OK">OK</option>
+                                <option value="NÃO OK">NÃO OK</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label>Limpeza</label>
+                            <select name="entry.1765001064" class="form-select">
+                                <option value="Limpa e Organizada">Limpa e Organizada</option>
+                                <option value="Suja">Suja</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label>Câmeras</label>
+                            <select name="entry.825633635" class="form-select">
+                                <option value="Funcionando">Funcionando</option>
+                                <option value="Offline">Offline</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-<div class="col-md-3">
-<label>Local</label>
-<select name="entry.1027575289" class="form-select">
-<option value="CeTIRP">CeTIRP</option>
-<option value="Casa 23 - Telefonia">Casa 23 - Telefonia</option>
-</select>
-</div>
+                <div class="mb-4">
+                    <label>Observações / Anormalidades</label>
+                    <textarea name="entry.723380094" class="form-control" rows="3" placeholder="Algo fora do comum?"></textarea>
+                </div>
 
-<div class="col-md-3">
-<label>Gerador</label>
-<select name="entry.590039013" class="form-select">
-<option value="Cummins">Cummins</option>
-<option value="Stemac">Stemac</option>
-</select>
-</div>
-</div>
-</div>
+                <button type="submit" class="btn-submit" id="btnEnvio">
+                    FINALIZAR E ENVIAR CHECKLIST
+                </button>
 
-<!-- FLUIDOS -->
-<div class="section-box">
-<span class="section-title">2. Fluidos</span>
+                <div id="successMsg" class="alert alert-success mt-3">
+                    ✔ Checklist enviado com sucesso para o CeTI-RP!
+                </div>
 
-<div class="row">
-<div class="col-md-3">
-<label>Óleo</label>
-<select name="entry.2084732658" class="form-select">
-<option value="OK">OK</option>
-<option value="NÃO OK">NÃO OK</option>
-</select>
-</div>
-
-<div class="col-md-3">
-<label>Arrefecimento</label>
-<select name="entry.277221535" class="form-select">
-<option value="OK">OK</option>
-<option value="NÃO OK">NÃO OK</option>
-</select>
-</div>
-
-<div class="col-md-3">
-<label>Vazamentos</label>
-<select name="entry.294271165" class="form-select">
-<option value="Não">Não</option>
-<option value="Sim">Sim</option>
-</select>
-</div>
-
-<div class="col-md-3">
-<label>Combustível</label>
-<input type="number" id="fuelInput" name="entry.2116426682" class="form-control" required>
-<div id="fuel-msg">⚠️ ABAIXO DE 70L</div>
-</div>
-</div>
-</div>
-
-<!-- ELÉTRICA -->
-<div class="section-box">
-<span class="section-title">3. Elétrica</span>
-
-<div class="row">
-<div class="col-md-4">
-<label>Bateria</label>
-<input type="text" name="entry.818904757" class="form-control">
-</div>
-
-<div class="col-md-4">
-<label>Horímetro</label>
-<input type="number" step="0.1" name="entry.848669693" class="form-control" required>
-</div>
-
-<div class="col-md-4">
-<label>Correias</label>
-<select name="entry.809569571" class="form-select">
-<option value="OK">OK</option>
-<option value="NÃO OK">NÃO OK</option>
-</select>
-</div>
-</div>
-</div>
-
-<!-- SEGURANÇA -->
-<div class="section-box">
-<span class="section-title">4. Segurança</span>
-
-<div class="row">
-<div class="col-md-4">
-<label>Extintor</label>
-<select name="entry.2132958707" class="form-select">
-<option value="OK">OK</option>
-<option value="NÃO OK">NÃO OK</option>
-</select>
-</div>
-
-<div class="col-md-4">
-<label>Limpeza</label>
-<select name="entry.1765001064" class="form-select">
-<option value="Limpa e Organizada">Limpa e Organizada</option>
-<option value="Suja">Suja</option>
-</select>
-</div>
-
-<div class="col-md-4">
-<label>Câmeras</label>
-<select name="entry.825633635" class="form-select">
-<option value="Funcionando">Funcionando</option>
-<option value="Offine">Offline</option> <!-- CORREÇÃO -->
-</select>
-</div>
-</div>
-</div>
-
-<div class="mb-3">
-<label>Observações</label>
-<textarea name="entry.723380094" class="form-control"></textarea>
-</div>
-
-<button type="submit" class="btn-submit" id="btnEnvio">
-ENVIAR CHECKLIST
-</button>
-
-<div id="successMsg" class="alert alert-success mt-3">
-✔ Checklist enviado com sucesso!
+            </form>
+        </div>
+    </div>
+    <p class="text-center mt-3 text-muted" style="font-size: 0.75rem;">CeTI-RP USP - Sistema de Vistoria de Geradores</p>
 </div>
 
-</form>
-</div>
-</div>
-</div>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+<!-- Iframe para processar o envio no fundo -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
 <script>
 function handleFormSubmit(form) {
     document.getElementById('btnEnvio').disabled = true;
-    document.getElementById('btnEnvio').innerText = "Enviando...";
+    document.getElementById('btnEnvio').innerText = "Enviando dados...";
 
+    // O tempo de 2 segundos é para garantir que o formulário foi enviado ao Google
     setTimeout(function () {
         document.getElementById('successMsg').style.display = 'block';
         form.reset();
 
         document.getElementById('btnEnvio').disabled = false;
-        document.getElementById('btnEnvio').innerText = "ENVIAR CHECKLIST";
+        document.getElementById('btnEnvio').innerText = "FINALIZAR E ENVIAR CHECKLIST";
+        
+        // Esconde a mensagem de sucesso após 5 segundos
+        setTimeout(function(){
+            document.getElementById('successMsg').style.display = 'none';
+        }, 5000);
+
     }, 2000);
 
     return true;
