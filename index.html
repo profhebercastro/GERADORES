@@ -10,7 +10,6 @@
     <style>
         body { background-color: #f4f4f4; padding: 10px; font-family: 'Segoe UI', Arial, sans-serif; }
 
-        /* BANNER RESPONSIVO */
         .usp-banner {
             background-color: #f7b22a;
             display: flex;
@@ -66,7 +65,6 @@
 
         #successMsg { display: none; font-weight: bold; text-align: center; }
         
-        /* Ajuste de margem para os campos no mobile */
         .row > div { margin-bottom: 15px; }
     </style>
 </head>
@@ -104,7 +102,7 @@
                             <input type="text" name="entry.56529241" class="form-control" placeholder="Nome" required>
                         </div>
                         <div class="col-12 col-md-3">
-                            <label>Local</label>
+                            <label>Localização</label>
                             <select name="entry.1027575289" class="form-select">
                                 <option value="CeTIRP">CeTIRP</option>
                                 <option value="Casa 23 - Telefonia">Casa 23 - Telefonia</option>
@@ -113,42 +111,53 @@
                         <div class="col-12 col-md-3">
                             <label>Gerador</label>
                             <select name="entry.590039013" class="form-select">
-                                <option value="Cummins">Cummins</option>
-                                <option value="Stemac">Stemac</option>
+                                <option value="CUMMINS 4BTA G4">Cummins (4BTA G4)</option>
+                                <option value="STEMAC MWM D229-4">Stemac (MWM D229-4)</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. FLUIDOS -->
+                <!-- 2. MOTOR E FLUIDOS -->
                 <div class="section-box shadow-sm">
                     <span class="section-title">2. Motor e Fluidos</span>
                     <div class="row">
                         <div class="col-6 col-md-3">
-                            <label>Óleo</label>
+                            <label>Nível de Óleo</label>
                             <select name="entry.2084732658" class="form-select">
                                 <option value="OK">OK</option>
                                 <option value="NÃO OK">NÃO OK</option>
                             </select>
                         </div>
                         <div class="col-6 col-md-3">
-                            <label>Arrefecimento</label>
+                            <label>Nível Arrefecimento</label>
                             <select name="entry.277221535" class="form-select">
                                 <option value="OK">OK</option>
                                 <option value="NÃO OK">NÃO OK</option>
                             </select>
                         </div>
                         <div class="col-6 col-md-3">
-                            <label>Vazamentos</label>
+                            <label>Vazamentos Visíveis?</label>
                             <select name="entry.294271165" class="form-select">
                                 <option value="Não">Não</option>
                                 <option value="Sim">Sim</option>
                             </select>
                         </div>
                         <div class="col-6 col-md-3">
-                            <label>Diesel (Litros)</label>
-                            <input type="number" id="fuelInput" name="entry.2116426682" class="form-control" placeholder="Lts" required>
+                            <label>Mangueiras?</label>
+                            <select name="entry.2039592457" class="form-select">
+                                <option value="OK">OK</option>
+                                <option value="NÃO OK">NÃO OK</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <label>Diesel Tanque (Litros)</label>
+                            <input type="number" id="fuelInput" name="entry.2116426682" class="form-control" placeholder="Principal" required>
                             <div id="fuel-msg">⚠️ ABAIXO DE 70L</div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <label>Diesel reserva (Litros)</label>
+                            <input type="number" name="entry.565495483" class="form-control" placeholder="Reserva">
                         </div>
                     </div>
                 </div>
@@ -157,17 +166,24 @@
                 <div class="section-box shadow-sm">
                     <span class="section-title">3. Elétrica e Funcionamento</span>
                     <div class="row">
-                        <div class="col-12 col-md-4">
-                            <label>Bateria (V)</label>
+                        <div class="col-6 col-md-3">
+                            <label>Tensão Bateria (V)</label>
                             <input type="text" name="entry.818904757" class="form-control" placeholder="Ex: 13.5V">
                         </div>
-                        <div class="col-12 col-md-4">
-                            <label>Horímetro</label>
+                        <div class="col-6 col-md-3">
+                            <label>Horímetro Atual (h)</label>
                             <input type="number" step="0.1" name="entry.848669693" class="form-control" placeholder="Horas" required>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <label>Correias</label>
+                        <div class="col-6 col-md-3">
+                            <label>Estado das Correias</label>
                             <select name="entry.809569571" class="form-select">
+                                <option value="OK">OK</option>
+                                <option value="NÃO OK">NÃO OK</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label>Cabos (Conexões)</label>
+                            <select name="entry.1975708916" class="form-select">
                                 <option value="OK">OK</option>
                                 <option value="NÃO OK">NÃO OK</option>
                             </select>
@@ -175,19 +191,34 @@
                     </div>
                 </div>
 
-                <!-- 4. SEGURANÇA -->
+                <!-- 4. PARÂMETROS OPERACIONAIS -->
                 <div class="section-box shadow-sm">
-                    <span class="section-title">4. Segurança e Infra</span>
+                    <span class="section-title">4. Parâmetros do Gerador</span>
+                    <div class="row">
+                        <div class="col-6 col-md-6">
+                            <label>Temperatura (C°)</label>
+                            <input type="number" name="entry.750246908" class="form-control" placeholder="Ex: 85">
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <label>Pressão (Bar/PSI)</label>
+                            <input type="text" name="entry.933987227" class="form-control" placeholder="Ex: 4 bar">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. SEGURANÇA -->
+                <div class="section-box shadow-sm">
+                    <span class="section-title">5. Segurança e Infra</span>
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <label>Extintor</label>
+                            <label>Verificar Extintor</label>
                             <select name="entry.2132958707" class="form-select">
                                 <option value="OK">OK</option>
                                 <option value="NÃO OK">NÃO OK</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-4">
-                            <label>Limpeza</label>
+                            <label>Limpeza da Sala</label>
                             <select name="entry.1765001064" class="form-select">
                                 <option value="Limpa e Organizada">Limpa e Organizada</option>
                                 <option value="Suja">Suja</option>
@@ -208,9 +239,7 @@
                     <textarea name="entry.723380094" class="form-control" rows="3" placeholder="Algo fora do comum?"></textarea>
                 </div>
 
-                <button type="submit" class="btn-submit" id="btnEnvio">
-                    FINALIZAR E ENVIAR CHECKLIST
-                </button>
+                <button type="submit" class="btn-submit" id="btnEnvio">FINALIZAR E ENVIAR CHECKLIST</button>
 
                 <div id="successMsg" class="alert alert-success mt-3">
                     ✔ Checklist enviado com sucesso para o CeTI-RP!
@@ -222,7 +251,6 @@
     <p class="text-center mt-3 text-muted" style="font-size: 0.75rem;">CeTI-RP USP - Sistema de Vistoria de Geradores</p>
 </div>
 
-<!-- Iframe para processar o envio no fundo -->
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
 <script>
@@ -230,21 +258,15 @@ function handleFormSubmit(form) {
     document.getElementById('btnEnvio').disabled = true;
     document.getElementById('btnEnvio').innerText = "Enviando dados...";
 
-    // O tempo de 2 segundos é para garantir que o formulário foi enviado ao Google
     setTimeout(function () {
         document.getElementById('successMsg').style.display = 'block';
         form.reset();
-
         document.getElementById('btnEnvio').disabled = false;
         document.getElementById('btnEnvio').innerText = "FINALIZAR E ENVIAR CHECKLIST";
-        
-        // Esconde a mensagem de sucesso após 5 segundos
-        setTimeout(function(){
-            document.getElementById('successMsg').style.display = 'none';
-        }, 5000);
-
+        document.getElementById('fuel-msg').style.display = 'none';
+        document.getElementById('fuelInput').classList.remove('fuel-critical');
+        setTimeout(function(){ document.getElementById('successMsg').style.display = 'none'; window.scrollTo(0,0); }, 5000);
     }, 2000);
-
     return true;
 }
 
@@ -252,7 +274,6 @@ const fuelInput = document.getElementById('fuelInput');
 fuelInput.addEventListener('input', function() {
     const valor = parseFloat(this.value);
     const msg = document.getElementById('fuel-msg');
-
     if (valor > 0 && valor < 70) {
         this.classList.add('fuel-critical');
         msg.style.display = 'block';
